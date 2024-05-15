@@ -10,7 +10,7 @@ import {
 } from 'react-native-appwrite';
 
 export interface VideoForm {
-  userId?: number;
+  userId?: number | string;
   title: string;
   video: {
     uri: string;
@@ -169,7 +169,7 @@ export const searchPosts = async (query: string) => {
   }
 };
 
-export const getUserPosts = async (userId: number) => {
+export const getUserPosts = async (userId: string) => {
   try {
     const posts = await databases.listDocuments(databaseId, videoCollectionId, [
       Query.equal('creator', userId),
@@ -225,7 +225,7 @@ export const uploadFile = async (file: any, type: string) => {
   const asset = {
     name: file.fileName,
     type: file.mimeType,
-    size: file.filesize,
+    size: file.fileSize,
     uri: file.uri,
   };
   console.log(asset);

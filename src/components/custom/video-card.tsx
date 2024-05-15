@@ -4,7 +4,7 @@ import React from 'react';
 import { useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 
-import { icons } from '../../ui/constants';
+import { icones } from '../../ui/constants';
 
 interface VideoCardProps {
   title: string;
@@ -51,7 +51,11 @@ const VideoCard = ({
           </View>
         </View>
         <View className="pt-2">
-          <Image source={icons.menu} className="h-5 w-5" resizeMode="contain" />
+          <Image
+            source={icones.menu}
+            className="h-5 w-5"
+            resizeMode="contain"
+          />
         </View>
       </View>
       {play ? (
@@ -82,7 +86,7 @@ const VideoCard = ({
             resizeMode="cover"
           />
           <Image
-            source={icons.play}
+            source={icones.play}
             className="absolute h-12 w-12"
             resizeMode="contain"
           />

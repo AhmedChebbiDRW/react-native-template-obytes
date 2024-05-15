@@ -1,14 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Alert } from 'react-native';
-
-import type { Data } from '@/components/custom/trending-videos';
+import type { Models } from 'react-native-appwrite';
 
 interface UseAppwriteProps {
-  fn: () => Promise<Data[]>;
+  fn: () => Promise<Models.Document[]>;
 }
 
 const useAppwrite = ({ fn }: UseAppwriteProps) => {
-  const [data, setData] = useState<Data[] | []>([]);
+  const [data, setData] = useState<Models.Document[] | []>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchPosts = useCallback(async () => {

@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-import { icons } from '../../ui/constants';
+import { icones } from '../../ui/constants';
 
 interface FormFieldProps {
   title: string;
@@ -36,7 +36,7 @@ const FormField = ({
         {title === 'Password' && (
           <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
             <Image
-              source={showPassword ? icons.eyeHide : icons.eye}
+              source={showPassword ? icones?.eyeHide : icones?.eye}
               className="h-6 w-6"
               resizeMode="contain"
             />

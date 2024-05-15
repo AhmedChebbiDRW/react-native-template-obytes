@@ -3,7 +3,7 @@ import React from 'react';
 import { useState } from 'react';
 import { Alert, Image, TextInput, TouchableOpacity, View } from 'react-native';
 
-import { icons } from '../../ui/constants';
+import { icones } from '@/ui/constants';
 
 interface FormFieldProps {
   initialQuery?: string;
@@ -39,7 +39,11 @@ const SearchInput = ({ initialQuery }: FormFieldProps) => {
           }
         }}
       >
-        <Image source={icons.search} className="h-5 w-5" resizeMode="contain" />
+        <Image
+          source={icones.search}
+          className="h-5 w-5"
+          resizeMode="contain"
+        />
       </TouchableOpacity>
     </View>
   );

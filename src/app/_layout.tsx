@@ -8,7 +8,7 @@ import FlashMessage from 'react-native-flash-message';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { APIProvider } from '@/api';
-import { hydrateAuth, loadSelectedTheme } from '@/core';
+import { loadSelectedTheme } from '@/core';
 import { useThemeConfig } from '@/core/use-theme-config';
 
 export { ErrorBoundary } from 'expo-router';
@@ -17,10 +17,11 @@ export { ErrorBoundary } from 'expo-router';
 import '../../global.css';
 
 export const unstable_settings = {
-  initialRouteName: '(app)',
+  // initialRouteName: '(app)',
+  initialRouteName: '(auth)',
 };
 
-hydrateAuth();
+// hydrateAuth();
 loadSelectedTheme();
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -35,9 +36,15 @@ function RootLayoutNav() {
   return (
     <Providers>
       <Stack>
-        <Stack.Screen name="(app)" options={{ headerShown: false }} />
-        <Stack.Screen name="onboarding" options={{ headerShown: false }} />
-        <Stack.Screen name="login" options={{ headerShown: false }} />
+        <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="search/[query]"
+            options={{ headerShown: false }}
+          />
+        </Stack>
       </Stack>
     </Providers>
   );

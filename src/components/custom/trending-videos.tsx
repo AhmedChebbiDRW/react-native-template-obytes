@@ -1,15 +1,12 @@
+import { FlashList } from '@shopify/flash-list';
 import { ResizeMode, Video } from 'expo-av';
 import React from 'react';
 import { useState } from 'react';
-import {
-  FlatList,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
-} from 'react-native';
+import { Image, ImageBackground, TouchableOpacity } from 'react-native';
 import * as Animatable from 'react-native-animatable';
+import type { Models } from 'react-native-appwrite';
 
-import { icons } from '../../ui/constants';
+import { icones } from '../../ui/constants';
 
 export interface Data {
   $id: number;
@@ -17,11 +14,11 @@ export interface Data {
 }
 
 interface TrendingProps {
-  posts: Data[] | [];
+  posts: Models.Document[] | [];
 }
 interface TrendingItemProps {
-  activeItem: number;
-  item: Data;
+  activeItem: string;
+  item: Models.Document;
 }
 
 const zoomIn = {
@@ -50,7 +47,7 @@ const TrendingItem = ({ activeItem, item }: TrendingItemProps) => {
   return (
     <Animatable.View
       className="mr-5"
-      animation={activeItem === item?.$id ? zoomIn : zoomOut}
+      animation={activeItem.toString() === item?.$id ? zoomIn : zoomOut}
     >
       {play ? (
         <Video
@@ -79,7 +76,7 @@ const TrendingItem = ({ activeItem, item }: TrendingItemProps) => {
             className="my-5 h-72 w-52 overflow-hidden rounded-[35px] shadow-lg shadow-black/50"
           />
           <Image
-            source={icons.play}
+            source={icones?.play}
             className="absolute h-12 w-12"
             resizeMode="contain"
           />
@@ -90,7 +87,7 @@ const TrendingItem = ({ activeItem, item }: TrendingItemProps) => {
 };
 
 const Trending = ({ posts }: TrendingProps) => {
-  const [activeItem, setActiveItem] = useState<number>(posts[1]?.$id);
+  const [activeItem, setActiveItem] = useState<string>(posts[1]?.$id);
 
   const onViewableItemsChanged = ({ viewableItems }: any) => {
     if (viewableItems.length > 0) {
@@ -99,10 +96,10 @@ const Trending = ({ posts }: TrendingProps) => {
   };
 
   return (
-    <FlatList
+    <FlashList
       data={posts}
-      keyExtractor={(item: Data) => item.$id.toString()}
-      renderItem={({ item }: { item: Data }) => (
+      keyExtractor={(item: Models.Document) => item.$id.toString()}
+      renderItem={({ item }: { item: Models.Document }) => (
         <TrendingItem activeItem={activeItem} item={item} />
       )}
       onViewableItemsChanged={onViewableItemsChanged}
