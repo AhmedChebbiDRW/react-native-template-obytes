@@ -8,6 +8,7 @@ import {
   Feed as FeedIcon,
   Settings as SettingsIcon,
   Style as StyleIcon,
+  Website as Website,
 } from '@/ui/icons';
 
 export default function TabLayout() {
@@ -48,6 +49,15 @@ export default function TabLayout() {
           title: 'Style',
           headerShown: false,
           tabBarIcon: ({ color }) => <StyleIcon color={color} />,
+          tabBarTestID: 'style-tab',
+        }}
+      />
+      <Tabs.Screen
+        name="example"
+        options={{
+          title: 'TryItOut',
+          headerShown: false,
+          tabBarIcon: ({ color }) => <Website color={color} />,
           tabBarTestID: 'style-tab',
         }}
       />

@@ -36,8 +36,8 @@ require('dotenv').config({
 const BUNDLE_ID = 'com.obytes'; // ios bundle id
 const PACKAGE = 'com.obytes'; // android package name
 const NAME = 'ObytesApp'; // app name
-const EXPO_ACCOUNT_OWNER = 'obytes'; // expo account owner
-const EAS_PROJECT_ID = 'c3e1075b-6fe7-4686-aa49-35b46a229044'; // eas project id
+const EXPO_ACCOUNT_OWNER = 'ahmeddrw'; // expo account owner
+const EAS_PROJECT_ID = 'aea71279-1a05-4b32-8680-5d48919bd3ff'; // eas project id
 const SCHEME = 'obytesApp'; // app scheme
 
 /**
