@@ -27,7 +27,6 @@ const SignUp = () => {
     try {
       setIsSubmitting(true);
       const result = await createUser(form.username, form.email, form.password);
-      console.log('🚀 ~ handleSubmit ~ result:', result);
       signIn({ access: result.$id, refresh: result.$id });
       router.replace('/home');
     } catch (error: any) {
@@ -38,7 +37,7 @@ const SignUp = () => {
   };
 
   return (
-    <SafeAreaView className="bg-primary h-full">
+    <SafeAreaView className="h-full bg-primary">
       <ScrollView>
         <View className="my-6 h-full w-full justify-center px-4">
           <Image
@@ -46,7 +45,7 @@ const SignUp = () => {
             contentFit="contain"
             className="h-[35px] w-[115px]"
           />
-          <Text className="font-psemibold mt-10 text-2xl text-white ">
+          <Text className="mt-10 font-psemibold text-2xl text-white ">
             Sign up
           </Text>
           <FormField
@@ -81,7 +80,7 @@ const SignUp = () => {
             </Text>
             <Link
               href={'/sign-in'}
-              className="font-psemibold text-secondary text-lg"
+              className="font-psemibold text-lg text-secondary"
             >
               Sign In
             </Link>

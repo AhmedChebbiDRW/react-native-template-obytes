@@ -1,18 +1,16 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable max-lines-per-function */
-import { FlashList } from '@shopify/flash-list';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { Alert, RefreshControl } from 'react-native';
+import { Alert, FlatList, RefreshControl } from 'react-native';
 import type { Models } from 'react-native-appwrite';
 
 import { EmptyState } from '@/components/custom/empty-state';
 import InfoBox from '@/components/custom/info-box';
 import VideoCard from '@/components/custom/video-card';
-import { signOut } from '@/core';
-import { getUserPosts } from '@/core/lib/appwrite';
+import { getUserPosts, signOut } from '@/core/lib/appwrite';
 import useAppwrite from '@/core/lib/use-appwrite';
-import { Image, TouchableOpacity, View } from '@/ui';
+import { FocusAwareStatusBar, Image, TouchableOpacity, View } from '@/ui';
 import { icones } from '@/ui/constants';
 
 import { images } from '../../ui/constants';
@@ -42,9 +40,12 @@ const Profile = () => {
   };
 
   return (
-    <View className="bg-primary h-full">
-      <FlashList
+    <View className="h-full bg-primary">
+      <FocusAwareStatusBar />
+      <FlatList
+        className=""
         data={posts}
+        // estimatedItemSize={300}
         keyExtractor={(item: Models.Document) => item.$id.toString()}
         renderItem={({ item }) => (
           <VideoCard
@@ -67,7 +68,7 @@ const Profile = () => {
                 className="h-6 w-6"
               />
             </TouchableOpacity>
-            <View className="border-secondary h-16 w-16 items-center justify-center rounded-lg border">
+            <View className="h-16 w-16 items-center justify-center rounded-lg border border-secondary">
               <Image
                 source={images.profile}
                 contentFit="cover"

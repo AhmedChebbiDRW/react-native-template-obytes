@@ -96,7 +96,11 @@ export const createUser = async (
 
 export const signIn = async (email: string, password: string) => {
   try {
-    const session = await account.createEmailPasswordSession(email, password);
+    console.log('🚀 ~ signIn ~ email, password:', email, password);
+    const session = await account.createEmailPasswordSession(
+      'ahmed.chebbi@digitalroguewave.com',
+      'ahmed1234'
+    );
 
     return session;
   } catch (error: any) {

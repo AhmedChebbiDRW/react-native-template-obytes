@@ -74,7 +74,7 @@ const Create = () => {
   };
 
   return (
-    <SafeAreaView className="bg-primary h-full">
+    <SafeAreaView className="h-full bg-primary">
       <ScrollView className="my-6 px-4">
         <Text className="font-psemibold text-2xl text-white">Upload Video</Text>
         <FormField
@@ -99,8 +99,8 @@ const Create = () => {
                 resizeMode={ResizeMode.COVER}
               />
             ) : (
-              <View className="bg-black-100 h-40 w-full items-center justify-center rounded-2xl px-4">
-                <View className="border-secondary-100 h-14 w-14 items-center justify-center border border-dashed">
+              <View className="h-40 w-full items-center justify-center rounded-2xl bg-black-100 px-4">
+                <View className="h-14 w-14 items-center justify-center border border-dashed border-secondary-100">
                   <Image
                     source={icones?.upload}
                     className="h-1/2 w-1/2"
@@ -126,7 +126,7 @@ const Create = () => {
                 className="h-64 w-full rounded-2xl "
               />
             ) : (
-              <View className="bg-black-100 border-black-200 h-16 w-full flex-row items-center justify-center space-x-2 rounded-2xl border-2 px-4">
+              <View className="h-16 w-full flex-row items-center justify-center space-x-2 rounded-2xl border-2 border-black-200 bg-black-100 px-4">
                 <Image
                   source={icones.upload}
                   className="h-5 w-5"

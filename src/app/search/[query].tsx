@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unstable-nested-components */
-import { FlashList } from '@shopify/flash-list';
 import { useLocalSearchParams } from 'expo-router';
 import React, { useEffect } from 'react';
+import { FlatList } from 'react-native';
 import type { Models } from 'react-native-appwrite';
 
 import { EmptyState } from '@/components/custom/empty-state';
@@ -22,9 +22,11 @@ const Search = () => {
   }, [query, refetch]);
 
   return (
-    <View className="bg-primary h-full">
-      <FlashList
+    <View className="h-full bg-primary">
+      <FlatList
         data={posts}
+        className=""
+        // estimatedItemSize={300}
         keyExtractor={(item: Models.Document) => item.$id.toString()}
         renderItem={({ item }) => (
           <VideoCard

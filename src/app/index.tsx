@@ -1,5 +1,5 @@
-import { Redirect, router } from 'expo-router';
-import React from 'react';
+import { Redirect, router, SplashScreen } from 'expo-router';
+import React, { useCallback, useEffect } from 'react';
 
 import CustomButton from '@/components/custom/custom-button';
 import { useAuth } from '@/core';
@@ -9,12 +9,25 @@ import { images } from '@/ui/constants';
 export default function App() {
   const status = useAuth.use.status();
 
+  const hideSplash = useCallback(async () => {
+    await SplashScreen.hideAsync();
+  }, []);
+
+  useEffect(() => {
+    if (status === 'idle') {
+      setTimeout(() => {
+        hideSplash();
+      }, 1000);
+    }
+  }, [hideSplash, status]);
+
   if (status === 'signIn') {
     return <Redirect href="/home" />;
   }
 
   return (
-    <View className="bg-primary h-full">
+    <View className="h-full bg-primary">
+      {/* eslint-disable-next-line react-native/no-inline-styles */}
       <ScrollView contentContainerStyle={{ height: '100%' }}>
         <View className="flex h-full w-full items-center justify-center px-4">
           <Image
@@ -43,7 +56,7 @@ export default function App() {
             />
           </View>
 
-          <Text className="font-pregular mt-7 text-center text-sm text-gray-100">
+          <Text className="mt-7 text-center font-pregular text-sm text-gray-100">
             Where Creativity Meets Innovation: Embark on a Journey of Limitless
             Exploration with Aora
           </Text>

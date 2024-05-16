@@ -29,7 +29,8 @@ const useAppwrite = ({ fn }: UseAppwriteProps) => {
       setData([]);
       setIsLoading(false);
     };
-  }, [fetchPosts]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const refetch = () => fetchPosts();
 

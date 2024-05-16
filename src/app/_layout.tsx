@@ -18,7 +18,7 @@ import '../../global.css';
 
 export const unstable_settings = {
   // initialRouteName: '(app)',
-  initialRouteName: '(auth)',
+  initialRouteName: 'index',
 };
 
 // hydrateAuth();
@@ -36,15 +36,10 @@ function RootLayoutNav() {
   return (
     <Providers>
       <Stack>
-        <Stack>
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen
-            name="search/[query]"
-            options={{ headerShown: false }}
-          />
-        </Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="search/[query]" options={{ headerShown: false }} />
       </Stack>
     </Providers>
   );

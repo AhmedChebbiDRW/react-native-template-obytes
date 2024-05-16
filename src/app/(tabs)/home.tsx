@@ -1,8 +1,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable max-lines-per-function */
-import { FlashList } from '@shopify/flash-list';
 import React, { useState } from 'react';
-import { RefreshControl } from 'react-native';
+import { FlatList, RefreshControl } from 'react-native';
 import type { Models } from 'react-native-appwrite';
 
 import { EmptyState } from '@/components/custom/empty-state';
@@ -11,7 +10,7 @@ import Trending from '@/components/custom/trending-videos';
 import VideoCard from '@/components/custom/video-card';
 import { getAllPosts, getLatestPosts } from '@/core/lib/appwrite';
 import useAppwrite from '@/core/lib/use-appwrite';
-import { Image, Text, View } from '@/ui';
+import { FocusAwareStatusBar, Image, Text, View } from '@/ui';
 import { images } from '@/ui/constants';
 
 const Home = () => {
@@ -32,9 +31,12 @@ const Home = () => {
   };
 
   return (
-    <View className="bg-primary h-full">
-      <FlashList
+    <View className="h-full w-full flex-1 bg-primary">
+      <FocusAwareStatusBar />
+      <FlatList
+        className=""
         data={posts}
+        // estimatedItemSize={300}
         keyExtractor={(item: Models.Document) => item.$id.toString()}
         renderItem={({ item }) => (
           <VideoCard
@@ -60,13 +62,13 @@ const Home = () => {
                 <Image
                   source={images.logoSmall}
                   className="h-10 w-9"
-                  resizeMode="contain"
+                  contentFit="contain"
                 />
               </View>
             </View>
             <SearchInput />
             <View className="w-full flex-1 pb-8 pt-5">
-              <Text className="font-pregular mb-3 text-lg text-gray-100">
+              <Text className="mb-3 font-pregular text-lg text-gray-100">
                 Latest Videos
               </Text>
               <Trending posts={latestPosts ?? []} />

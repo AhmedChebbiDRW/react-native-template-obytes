@@ -1,10 +1,16 @@
-import { FlashList } from '@shopify/flash-list';
 import { ResizeMode, Video } from 'expo-av';
 import React from 'react';
 import { useState } from 'react';
-import { Image, ImageBackground, TouchableOpacity } from 'react-native';
+import {
+  FlatList,
+  Image,
+  ImageBackground,
+  TouchableOpacity,
+} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import type { Models } from 'react-native-appwrite';
+
+import { View } from '@/ui';
 
 import { icones } from '../../ui/constants';
 
@@ -91,27 +97,35 @@ const Trending = ({ posts }: TrendingProps) => {
 
   const onViewableItemsChanged = ({ viewableItems }: any) => {
     if (viewableItems.length > 0) {
+      console.log(
+        '🚀 ~ onViewableItemsChanged ~ viewableItems:',
+        viewableItems[0].key
+      );
       setActiveItem(viewableItems[0].key);
     }
   };
 
   return (
-    <FlashList
-      data={posts}
-      keyExtractor={(item: Models.Document) => item.$id.toString()}
-      renderItem={({ item }: { item: Models.Document }) => (
-        <TrendingItem activeItem={activeItem} item={item} />
-      )}
-      onViewableItemsChanged={onViewableItemsChanged}
-      viewabilityConfig={{
-        itemVisiblePercentThreshold: 70,
-      }}
-      contentOffset={{
-        x: 170,
-        y: 0,
-      }}
-      horizontal
-    />
+    <View className="h-full w-full">
+      <FlatList
+        data={posts}
+        className=""
+        // estimatedItemSize={300}
+        keyExtractor={(item: Models.Document) => item.$id.toString()}
+        renderItem={({ item }: { item: Models.Document }) => (
+          <TrendingItem activeItem={activeItem} item={item} />
+        )}
+        onViewableItemsChanged={onViewableItemsChanged}
+        viewabilityConfig={{
+          itemVisiblePercentThreshold: 70,
+        }}
+        contentOffset={{
+          x: 170,
+          y: 0,
+        }}
+        horizontal
+      />
+    </View>
   );
 };
 

@@ -1,5 +1,5 @@
-import { FlashList } from '@shopify/flash-list';
 import React from 'react';
+import { FlatList } from 'react-native';
 
 import type { Post } from '@/api';
 import { usePosts } from '@/api';
@@ -21,14 +21,15 @@ export default function Feed() {
     );
   }
   return (
-    <View className="flex-1 ">
+    <View className="h-full w-full flex-1 ">
       <FocusAwareStatusBar />
-      <FlashList
+      <FlatList
+        className=""
         data={data}
         renderItem={renderItem}
         keyExtractor={(_, index) => `item-${index}`}
         ListEmptyComponent={<EmptyList isLoading={isPending} />}
-        estimatedItemSize={300}
+        // estimatedItemSize={300}
       />
     </View>
   );

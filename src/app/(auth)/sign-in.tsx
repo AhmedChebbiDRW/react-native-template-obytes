@@ -1,16 +1,27 @@
 /* eslint-disable max-lines-per-function */
-import { Link, router } from 'expo-router';
-import React, { useState } from 'react';
+import { Link, router, SplashScreen } from 'expo-router';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Alert, SafeAreaView, ScrollView, View } from 'react-native';
 
 import CustomButton from '@/components/custom/custom-button';
 import FormField from '@/components/custom/form-field';
 import { useAuth } from '@/core';
-import { getCurrentUser } from '@/core/lib/appwrite';
+import { getCurrentUser, signIn } from '@/core/lib/appwrite';
 import { Image, Text } from '@/ui';
 import { images } from '@/ui/constants';
 
 const SignIn = () => {
+  const status = useAuth.use.status();
+  const hideSplash = useCallback(async () => {
+    await SplashScreen.hideAsync();
+  }, []);
+  useEffect(() => {
+    if (status === 'idle') {
+      setTimeout(() => {
+        hideSplash();
+      }, 1000);
+    }
+  }, [hideSplash, status]);
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -18,7 +29,7 @@ const SignIn = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // const { setUser, setIsLoggedIn } = useGlobalContext();
-  const { signIn } = useAuth();
+  const { signIn: LocalSignIn } = useAuth();
 
   const handleSubmit = async () => {
     if (!form.email || !form.password) {
@@ -26,7 +37,13 @@ const SignIn = () => {
     }
     try {
       setIsSubmitting(true);
-      await signIn({ access: form.email, refresh: form.password });
+      console.log(
+        '🚀 ~ handleSubmit ~ form.email, form.password:',
+        form.email,
+        form.password
+      );
+      await signIn(form.email, form.password);
+      LocalSignIn({ access: 'access-token', refresh: 'refresh-token' });
       const result = await getCurrentUser();
       console.log('🚀 ~ handleSubmit ~ result:', result);
 
@@ -39,7 +56,7 @@ const SignIn = () => {
   };
 
   return (
-    <SafeAreaView className="bg-primary h-full">
+    <SafeAreaView className="h-full bg-primary">
       <ScrollView>
         <View className="my-6 min-h-[85vh] w-full justify-center px-4">
           <Image
@@ -47,7 +64,7 @@ const SignIn = () => {
             contentFit="contain"
             className="h-[35px] w-[115px]"
           />
-          <Text className="font-psemibold mt-10 text-2xl text-white ">
+          <Text className="mt-10 font-psemibold text-2xl text-white ">
             Log in to Aora
           </Text>
           <FormField
@@ -75,7 +92,7 @@ const SignIn = () => {
             </Text>
             <Link
               href={'/sign-up'}
-              className="font-psemibold text-secondary text-lg"
+              className="font-psemibold text-lg text-secondary"
             >
               Sign Up
             </Link>
