@@ -1,4 +1,4 @@
-// const colors = require('./src/ui/colors');
+const colors = require('./src/ui/colors');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -35,6 +35,7 @@ module.exports = {
         gray: {
           100: '#CDCDE0',
         },
+        ...colors,
       },
     },
   },

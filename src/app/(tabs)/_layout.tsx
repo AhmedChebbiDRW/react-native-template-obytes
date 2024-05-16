@@ -92,6 +92,21 @@ const TabsLayout = () => {
           }}
         />
         <Tabs.Screen
+          name="camera"
+          options={{
+            title: 'Camera',
+            headerShown: false,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon
+                icon={icones.plus}
+                color={color}
+                name="Camera"
+                focused={focused}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
           name="profile"
           options={{
             title: 'Profile',

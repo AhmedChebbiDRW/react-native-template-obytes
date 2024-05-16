@@ -76,6 +76,22 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         ],
       },
     ],
+    [
+      'expo-media-library',
+      {
+        photosPermission: 'Allow $(PRODUCT_NAME) to access your photos.',
+        savePhotosPermission: 'Allow $(PRODUCT_NAME) to save photos.',
+        isAccessMediaLocationEnabled: 'true',
+      },
+    ],
+    [
+      'expo-camera',
+      {
+        cameraPermission: 'Allow $(PRODUCT_NAME) to access your camera',
+        microphonePermission: 'Allow $(PRODUCT_NAME) to access your microphone',
+        recordAudioAndroid: true,
+      },
+    ],
   ],
   extra: {
     ...ClientEnv,
